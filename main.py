@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import random
 import config
+import asyncio
 
 from os import listdir
 
@@ -21,12 +22,20 @@ async def on_ready():
 
 # load cogs from cogs directory
 
-for cog in listdir('cogs'):
-    if cog.endswith('.py'):
-        if not cog.startswith("_"):
-            bot.load_extension(f'cogs.{cog[:-3]}')
-            # slice to remove `.py` from the end of the file name
-            print("Loaded cog: " + cog[:-3])
+async def load_extensions():
+    for filename in listdir("./cogs"):
+        if filename.endswith('.py'):
+            if not filename.startswith("_"):
+                await bot.load_extension(f'cogs.{filename[:-3]}')
+                # slice to remove `.py` from the end of the file name
+                print("Loaded cog: " + filename[:-3])
 
-bot.load_extension('jishaku')
-bot.run(config.token)
+    await bot.load_extension('jishaku')
+
+
+async def main():
+    async with bot:
+        await load_extensions()
+        await bot.start(config.token)
+
+asyncio.run(main())
