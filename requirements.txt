@@ -1,2 +1,3 @@
 discord
 jishaku
+discord-py-interactions

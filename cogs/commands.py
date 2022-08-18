@@ -14,6 +14,6 @@ class Commands(commands.Cog):
         embed = discord.Embed(title=answer, description=question,   color=discord.Color.blue())
         await ctx.send(embed=embed)
     
-def setup(bot):
-    bot.add_cog(Commands(bot))
+async def setup(bot):
+    await bot.add_cog(Commands(bot))
     print("Loaded Events")

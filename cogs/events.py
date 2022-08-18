@@ -21,6 +21,6 @@ class Events(commands.Cog):
             await member.guild.system_channel.send(embed=embed)
 
 
-def setup(bot):
-    bot.add_cog(Events(bot))
+async def setup(bot):
+    await bot.add_cog(Events(bot))
     print("Loaded Events")
