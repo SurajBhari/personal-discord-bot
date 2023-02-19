@@ -1,14 +1,16 @@
 import discord
 from discord.ext import commands
 import random
-import config
 import asyncio
 
 from os import listdir
 
 description = '''Specially made bot for my own server nothing more '''
 
-intents = discord.Intents.all()
+intents = discord.Intents.default()
+intents.members = True
+intents.presences = True
+intents.message_content = True
 
 bot = commands.Bot(command_prefix='?', description=description, intents=intents)
 
@@ -18,6 +20,7 @@ async def on_ready():
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
+    print(f"Connected to {len(bot.guilds)} guilds with the command prefix: {bot.command_prefix}")
     print('------')
 
 # load cogs from cogs directory
